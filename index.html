@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Badminton Highlights With Video Clips</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-box">
+      <div class="shuttle"></div>
+      <h2>Loading Badminton Highlights...</h2>
+      <p class="loader-text">Preparing clips, players, and top rally moments.</p>
+    </div>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="brand-badge">BH</div>
+        <div>
+          <div>Badminton Highlights</div>
+          <small class="muted-text">Interactive JavaScript Project</small>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="sidebarToggle">☰ Menu</button>
+        <button class="btn btn-primary" id="shuffleBtn">Shuffle Highlights</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside id="sidebar">
+        <div class="sidebar-card">
+          <h3>Navigation</h3>
+          <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#clips">Video Clips</a>
+            <a href="#featured">Featured Match</a>
+            <a href="#request">Request a Clip</a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Keyboard Shortcuts</h3>
+          <div class="shortcut-list">
+            <div class="shortcut-item"><strong>M</strong> — open/close menu</div>
+            <div class="shortcut-item"><strong>/</strong> — focus search</div>
+            <div class="shortcut-item"><strong>R</strong> — random highlight</div>
+            <div class="shortcut-item"><strong>Esc</strong> — close sidebar</div>
+            <div class="shortcut-item"><strong>T</strong> — scroll to top</div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Screen Status</h3>
+          <div class="status-bar">
+            <div class="status-chip" id="screenSize">Width: --</div>
+            <div class="status-chip" id="scrollStatus">Scroll: 0px</div>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <section class="hero hero-parallax" id="home">
+          <div class="hero-content">
+            <div class="tag">🏸 Fast smashes • dramatic rallies • match-winning moments</div>
+            <h1>Badminton highlights with video clips and interactive controls</h1>
+            <p class="lead">
+              Explore exciting badminton rally clips, filter by match type, watch a featured video,
+              and submit your own clip request. This project demonstrates page-load effects, form validation,
+              keyboard interactions, hover animations, scroll behavior, video events, parallax motion, and responsive design.
+            </p>
+            <div class="hero-stats">
+              <div class="pill">Interactive UI</div>
+              <div class="pill">Responsive Layout</div>
+              <div class="pill">Video Event Tracking</div>
+              <div class="pill">Dynamic Sidebar</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="clips">
+          <div class="section-head">
+            <div>
+              <h2>Highlight Clips</h2>
+              <p class="muted-text no-margin">Search, filter, hover, and play badminton videos.</p>
+            </div>
+            <div class="controls">
+              <input type="text" id="searchInput" class="search" placeholder="Search player, event, or clip title..." />
+              <select id="filterSelect" class="filter">
+                <option value="all">All Categories</option>
+                <option value="smash">Smash</option>
+                <option value="rally">Rally</option>
+                <option value="defense">Defense</option>
+                <option value="final">Final Match</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid" id="clipGrid"></div>
+        </section>
+
+        <section class="section featured" id="featured">
+          <div class="featured-panel">
+            <h2>Featured Match Clip</h2>
+            <p class="muted-text">
+              This main video tracks play, pause, and ended events. It also updates the live status below.
+            </p>
+            <video id="featuredVideo" controls poster="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80">
+              <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="status-bar">
+              <div class="status-chip" id="videoState">Video State: Ready</div>
+              <div class="status-chip" id="videoTime">Current Time: 0.0s</div>
+            </div>
+          </div>
+
+          <div class="info-panel">
+            <h2>Key Match Moments</h2>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-time">00:12</div>
+                <div>Quick serve return and instant net pressure starts the tempo.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">00:28</div>
+                <div>Explosive jump smash lands near the sideline for a clean winner.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">00:41</div>
+                <div>Defensive recovery turns into a surprise cross-court counterattack.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">00:57</div>
+                <div>Longest rally of the clip ends with a deceptive soft drop shot.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="request">
+          <div class="form-panel">
+            <div class="section-head">
+              <div>
+                <h2>Request a Highlight Clip</h2>
+                <p class="muted-text no-margin">Form submission includes event handling and validation.</p>
+              </div>
+            </div>
+
+            <form id="requestForm" novalidate>
+              <div class="field">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" />
+                <div class="error" id="nameError"></div>
+              </div>
+
+              <div class="field">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email address" />
+                <div class="error" id="emailError"></div>
+              </div>
+
+              <div class="field">
+                <label for="category">Highlight Type</label>
+                <select id="category">
+                  <option value="">Choose a category</option>
+                  <option value="Smash">Smash</option>
+                  <option value="Rally">Rally</option>
+                  <option value="Defense">Defense</option>
+                  <option value="Final Match">Final Match</option>
+                </select>
+                <div class="error" id="categoryError"></div>
+              </div>
+
+              <div class="field">
+                <label for="message">Requested Match or Player</label>
+                <textarea id="message" placeholder="Example: Please add more clips from championship finals and long rally exchanges."></textarea>
+                <div class="error" id="messageError"></div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+                <button type="reset" class="btn btn-ghost">Clear Form</button>
+              </div>
+            </form>
+
+            <div id="successMessage" class="success-box success-spacing"></div>
+          </div>
+        </section>
+
+        <footer>
+          Built with HTML, CSS, and JavaScript for an event-driven multimedia project.
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <button class="back-top" id="backToTop">↑</button>
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
