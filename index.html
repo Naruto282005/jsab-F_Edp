@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Page load screen -->
+  <!-- Loader -->
   <div id="loader">
     <h2>Loading Badminton Highlights...</h2>
   </div>
 
-  <!-- Sidebar overlay for mobile -->
+  <!-- Overlay -->
   <div id="overlay"></div>
 
   <!-- Header -->
@@ -31,21 +31,23 @@
     <p class="shortcut">Press <strong>Esc</strong> to close</p>
   </aside>
 
-  <!-- Main -->
   <main>
-    <!-- Hero / parallax -->
+    <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero-text">
         <h1>Badminton Match Highlights</h1>
         <p>Watch exciting clips, view featured moments, and send your own requests.</p>
+        <button id="highlightBtn">Explore Highlights</button>
       </div>
     </section>
 
-    <!-- Search/filter -->
+    <!-- Clips Section -->
     <section class="section" id="clips">
       <h2>Highlight Clips</h2>
+
       <div class="controls">
         <input type="text" id="searchInput" placeholder="Search clip title..." />
+
         <select id="filterSelect">
           <option value="all">All</option>
           <option value="smash">Smash</option>
@@ -55,30 +57,52 @@
       </div>
 
       <div class="card-container" id="cardContainer">
-        <div class="card" data-category="smash" data-title="Jump Smash Winner">
-          <img src="f2.webp" alt="Badminton smash" />
+        <!-- Card 1 -->
+        <div class="card video-card" data-category="smash" data-title="Jump Smash Winner">
+          <div class="media-box">
+            <img src="f2.webp" alt="Badminton smash" class="card-image" />
+            <video class="hover-video" muted loop playsinline preload="metadata">
+              <source src="video1.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h3>Jump Smash Winner</h3>
           <p>Strong finishing smash near the sideline.</p>
         </div>
 
-        <div class="card" data-category="rally" data-title="Long Rally Exchange">
-          <img src="f3.webp" alt="Badminton rally" />
+        <!-- Card 2 -->
+        <div class="card video-card" data-category="rally" data-title="Long Rally Exchange">
+          <div class="media-box">
+            <img src="f3.webp" alt="Badminton rally" class="card-image" />
+            <video class="hover-video" muted loop playsinline preload="metadata">
+              <source src="video2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h3>Long Rally Exchange</h3>
           <p>Quick movement and long control rally.</p>
         </div>
 
-        <div class="card" data-category="defense" data-title="Defensive Save">
-          <img src="f4.png" alt="Badminton defense" />
+        <!-- Card 3 -->
+        <div class="card video-card" data-category="defense" data-title="Defensive Save">
+          <div class="media-box">
+            <img src="f4.png" alt="Badminton defense" class="card-image" />
+            <video class="hover-video" muted loop playsinline preload="metadata">
+              <source src="video3.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h3>Defensive Save</h3>
           <p>A good save that turned into a winning point.</p>
         </div>
       </div>
     </section>
 
-    <!-- Featured video -->
+    <!-- Featured Video -->
     <section class="section" id="featured">
       <h2>Featured Video</h2>
-      <video id="mainVideo" controls poster="https://images.unsplash.com/photo-1595220427358-8cf2ce3d7f89?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGJhZG1pbnRvbnxlbnwwfHwwfHx8MA%3D%3D">
+
+      <video id="mainVideo" controls poster="f1.jpg">
         <source src="vid1.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -89,9 +113,10 @@
       </div>
     </section>
 
-    <!-- Form -->
+    <!-- Request Form -->
     <section class="section" id="request">
       <h2>Request a Clip</h2>
+
       <form id="requestForm">
         <input type="text" id="name" placeholder="Enter your name" />
         <small class="error" id="nameError"></small>
@@ -104,18 +129,17 @@
 
         <button type="submit">Submit Request</button>
       </form>
+
       <p id="successMessage"></p>
     </section>
 
-    <!-- Resize + scroll info -->
+    <!-- Info Box -->
     <section class="section info-box">
-      <p id="scrollText">Scroll Position: 0</p>
+      <p id="scrollText">Scroll Position: 0px</p>
       <p id="resizeText">Screen Width: 0px</p>
+      <button id="topBtn">↑</button>
     </section>
   </main>
-
-  <!-- Back to top -->
-  <button id="topBtn">↑</button>
 
   <script src="script.js"></script>
 </body>

@@ -1,14 +1,16 @@
-/* Basic reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* Body style */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
+  background: #f4f7fb;
   color: #222;
   line-height: 1.6;
 }
@@ -17,7 +19,7 @@ body {
 #loader {
   position: fixed;
   inset: 0;
-  background: #1f4e79;
+  background: #1e88e5;
   color: white;
   display: flex;
   justify-content: center;
@@ -27,53 +29,44 @@ body {
 
 /* Header */
 header {
-  background: #1f4e79;
+  background: #1e88e5;
   color: white;
   padding: 15px 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 15px;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .logo {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
 }
 
-#menuBtn,
-#highlightBtn,
-form button,
-#topBtn {
-  background: #2e86c1;
-  color: white;
+#menuBtn {
+  background: white;
+  color: #1e88e5;
   border: none;
   padding: 10px 14px;
   cursor: pointer;
   border-radius: 6px;
-}
-
-#menuBtn:hover,
-#highlightBtn:hover,
-form button:hover,
-#topBtn:hover {
-  background: #1b5f8a;
+  font-weight: bold;
 }
 
 /* Sidebar */
 #sidebar {
   position: fixed;
   top: 0;
-  left: -240px;
-  width: 220px;
+  left: -260px;
+  width: 250px;
   height: 100%;
-  background: #ffffff;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-  padding: 20px;
-  transition: left 0.3s ease;
-  z-index: 1200;
+  background: #0d47a1;
+  color: white;
+  padding: 25px 20px;
+  transition: 0.3s ease;
+  z-index: 1500;
 }
 
 #sidebar.active {
@@ -81,33 +74,34 @@ form button:hover,
 }
 
 #sidebar h3 {
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 #sidebar a {
   display: block;
+  color: white;
   text-decoration: none;
-  color: #222;
-  margin: 10px 0;
+  margin: 12px 0;
+  font-size: 16px;
 }
 
 #sidebar a:hover {
-  color: #1f4e79;
+  text-decoration: underline;
 }
 
 .shortcut {
   margin-top: 20px;
   font-size: 14px;
-  color: #666;
+  opacity: 0.9;
 }
 
 /* Overlay */
 #overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.45);
   display: none;
-  z-index: 1100;
+  z-index: 1400;
 }
 
 #overlay.show {
@@ -116,192 +110,296 @@ form button:hover,
 
 /* Hero */
 .hero {
-  height: 300px;
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-    url("f1.png")
-    center/cover no-repeat;
+  min-height: 80vh;
+  background: url("f1.png") center/cover no-repeat;
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 30px;
-  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .hero-text {
-  max-width: 500px;
+  position: relative;
+  z-index: 1;
+  color: white;
+  max-width: 700px;
 }
 
-.hero h1 {
-  font-size: 34px;
-  margin-bottom: 10px;
-}
-
-.hero p {
+.hero-text h1 {
+  font-size: 46px;
   margin-bottom: 15px;
 }
 
-/* General section */
+.hero-text p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+#highlightBtn {
+  background: #ffca28;
+  color: #222;
+  border: none;
+  padding: 12px 22px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+#highlightBtn:hover {
+  background: #ffb300;
+}
+
+/* Sections */
 .section {
-  padding: 30px 20px;
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .section h2 {
-  margin-bottom: 15px;
-  color: #1f4e79;
+  margin-bottom: 20px;
+  font-size: 30px;
+  color: #0d47a1;
+  text-align: center;
 }
 
 /* Controls */
 .controls {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .controls input,
-.controls select,
-form input,
-form textarea {
-  padding: 10px;
-  border: 1px solid #bbb;
+.controls select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  width: 100%;
-  max-width: 300px;
-}
-
-form textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  min-width: 220px;
 }
 
 /* Cards */
 .card-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
 }
 
 .card {
   background: white;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card h3 {
+  padding: 15px 15px 5px;
+}
+
+.card p {
+  padding: 0 15px 20px;
+  color: #555;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
-.card img {
+/* Hover video card */
+.media-box {
+  position: relative;
   width: 100%;
-  height: 180px;
+  height: 220px;
+  overflow: hidden;
+  background: #000;
+}
+
+.card-image,
+.hover-video {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-}
-
-.card h3,
-.card p {
-  padding: 10px 12px;
-}
-
-/* Video */
-video {
-  width: 100%;
-  max-width: 700px;
   display: block;
-  border-radius: 8px;
+}
+
+.card-image {
+  transition: opacity 0.3s ease;
+}
+
+.hover-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  background: black;
+}
+
+.video-card:hover .hover-video {
+  opacity: 1;
+}
+
+.video-card:hover .card-image {
+  opacity: 0;
+}
+
+/* Featured video */
+#featured video {
+  width: 100%;
+  max-width: 850px;
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 .video-status {
-  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
 }
 
-/* Errors and success */
+.video-status p {
+  margin: 8px 0;
+}
+
+/* Form */
+#requestForm {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
+  margin: auto;
+}
+
+#requestForm input,
+#requestForm textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+#requestForm textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+#requestForm button {
+  margin-top: 16px;
+  background: #1e88e5;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+#requestForm button:hover {
+  background: #1565c0;
+}
+
 .error {
-  color: red;
-  font-size: 13px;
-  min-height: 16px;
+  display: block;
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 4px;
+  min-height: 18px;
 }
 
 #successMessage {
-  margin-top: 10px;
+  margin-top: 15px;
   color: green;
   font-weight: bold;
+  text-align: center;
 }
 
 /* Info box */
 .info-box {
-  background: white;
-  margin: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: #eeeeee;
+  border-radius: 10px;
+  padding: 22px 20px 70px;
+  margin-top: 10px;
+  position: relative;
 }
 
-/* Top button */
+.info-box p {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+/* Top button inside gray box */
 #topBtn {
-  position: fixed;
+  position: absolute;
   right: 20px;
   bottom: 20px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #1e88e5;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
   display: none;
+  border-radius: 0;
+}
+
+#topBtn:hover {
+  background: #1565c0;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .card-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .card-container {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 32px;
   }
 
-  .hero h1 {
-    font-size: 26px;
+  .hero-text p {
+    font-size: 16px;
   }
 
-  header {
-    flex-wrap: wrap;
-    gap: 10px;
+  .section h2 {
+    font-size: 24px;
   }
-}
 
-#request {
-  text-align: center;
-}
+  .controls {
+    flex-direction: column;
+  }
 
-#request form {
-  max-width: 300px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+  .controls input,
+  .controls select {
+    width: 100%;
+    min-width: unset;
+  }
 
-#request input,
-#request textarea,
-#request button {
-  width: 100%;
-}
+  #requestForm {
+    padding: 18px;
+  }
 
-#featured {
-  text-align: center;
-}
+  .info-box {
+    padding: 20px 16px 75px;
+  }
 
-#featured video {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 700px;
-}
-
-.video-status {
-  text-align: center;
-  margin-top: 10px;
+  #topBtn {
+    right: 16px;
+    bottom: 16px;
+  }
 }
