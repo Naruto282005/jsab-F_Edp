@@ -1,7 +1,39 @@
+// Theme toggle
+const themeToggle = document.getElementById("themeToggle");
+
+function applyTheme(theme) {
+  if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+    if (themeToggle) {
+      themeToggle.textContent = "Light Mode";
+    }
+  } else {
+    document.body.classList.remove("dark-mode");
+    if (themeToggle) {
+      themeToggle.textContent = "Dark Mode";
+    }
+  }
+}
+
+const savedTheme = localStorage.getItem("theme");
+applyTheme(savedTheme || "light");
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", function () {
+    const isDark = document.body.classList.contains("dark-mode");
+    const newTheme = isDark ? "light" : "dark";
+    applyTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  });
+}
+
 // Page load event
 window.addEventListener("load", function () {
   setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
+    const loader = document.getElementById("loader");
+    if (loader) {
+      loader.style.display = "none";
+    }
   }, 1000);
 
   updateResizeText();
@@ -14,22 +46,31 @@ const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
 // Sidebar toggle
-menuBtn.addEventListener("click", function () {
-  sidebar.classList.toggle("active");
-  overlay.classList.toggle("show");
-});
+if (menuBtn) {
+  menuBtn.addEventListener("click", function () {
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("show");
+  });
+}
 
 // Overlay closes sidebar
-overlay.addEventListener("click", function () {
-  sidebar.classList.remove("active");
-  overlay.classList.remove("show");
-});
+if (overlay) {
+  overlay.addEventListener("click", function () {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("show");
+  });
+}
 
-// Keyboard event
+// Keyboard events
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     sidebar.classList.remove("active");
     overlay.classList.remove("show");
+  }
+
+  if (event.key.toLowerCase() === "1") {
+    sidebar.classList.add("active");
+    overlay.classList.add("show");
   }
 
   if (event.key.toLowerCase() === "h") {
@@ -39,13 +80,13 @@ document.addEventListener("keydown", function (event) {
 
 // Button click event
 const highlightBtn = document.getElementById("highlightBtn");
-
 if (highlightBtn) {
   highlightBtn.addEventListener("click", function () {
     alert("Enjoy watching the badminton highlights!");
-    document.getElementById("clips").scrollIntoView({
-      behavior: "smooth"
-    });
+    const clipsSection = document.getElementById("clips");
+    if (clipsSection) {
+      clipsSection.scrollIntoView({ behavior: "smooth" });
+    }
   });
 }
 
@@ -59,10 +100,12 @@ window.addEventListener("scroll", function () {
 
   updateScrollText();
 
-  if (scrollY > 200) {
-    topBtn.style.display = "block";
-  } else {
-    topBtn.style.display = "none";
+  if (topBtn) {
+    if (scrollY > 200) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
   }
 
   if (hero) {
@@ -71,12 +114,11 @@ window.addEventListener("scroll", function () {
 });
 
 // Back to top
-topBtn.addEventListener("click", function () {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+if (topBtn) {
+  topBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
-});
+}
 
 // Resize event
 const resizeText = document.getElementById("resizeText");
@@ -86,11 +128,15 @@ window.addEventListener("resize", function () {
 });
 
 function updateResizeText() {
-  resizeText.textContent = "Screen Width: " + window.innerWidth + "px";
+  if (resizeText) {
+    resizeText.textContent = "Screen Width: " + window.innerWidth + "px";
+  }
 }
 
 function updateScrollText() {
-  scrollText.textContent = "Scroll Position: " + window.scrollY + "px";
+  if (scrollText) {
+    scrollText.textContent = "Scroll Position: " + window.scrollY + "px";
+  }
 }
 
 // Search and filter
@@ -117,29 +163,44 @@ function filterCards() {
   });
 }
 
-searchInput.addEventListener("input", filterCards);
-filterSelect.addEventListener("change", filterCards);
+if (searchInput) {
+  searchInput.addEventListener("input", filterCards);
+}
+
+if (filterSelect) {
+  filterSelect.addEventListener("change", filterCards);
+}
 
 // Featured video events
 const mainVideo = document.getElementById("mainVideo");
 const videoStatus = document.getElementById("videoStatus");
 const videoTime = document.getElementById("videoTime");
 
-mainVideo.addEventListener("play", function () {
-  videoStatus.textContent = "Video Status: Playing";
-});
+if (mainVideo) {
+  mainVideo.addEventListener("play", function () {
+    if (videoStatus) {
+      videoStatus.textContent = "Video Status: Playing";
+    }
+  });
 
-mainVideo.addEventListener("pause", function () {
-  videoStatus.textContent = "Video Status: Paused";
-});
+  mainVideo.addEventListener("pause", function () {
+    if (videoStatus) {
+      videoStatus.textContent = "Video Status: Paused";
+    }
+  });
 
-mainVideo.addEventListener("ended", function () {
-  videoStatus.textContent = "Video Status: Ended";
-});
+  mainVideo.addEventListener("ended", function () {
+    if (videoStatus) {
+      videoStatus.textContent = "Video Status: Ended";
+    }
+  });
 
-mainVideo.addEventListener("timeupdate", function () {
-  videoTime.textContent = "Current Time: " + mainVideo.currentTime.toFixed(1) + "s";
-});
+  mainVideo.addEventListener("timeupdate", function () {
+    if (videoTime) {
+      videoTime.textContent = "Current Time: " + mainVideo.currentTime.toFixed(1) + "s";
+    }
+  });
+}
 
 // Hover play videos on cards
 const videoCards = document.querySelectorAll(".video-card");
@@ -173,33 +234,35 @@ const emailError = document.getElementById("emailError");
 const messageError = document.getElementById("messageError");
 const successMessage = document.getElementById("successMessage");
 
-requestForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+if (requestForm) {
+  requestForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  nameError.textContent = "";
-  emailError.textContent = "";
-  messageError.textContent = "";
-  successMessage.textContent = "";
+    nameError.textContent = "";
+    emailError.textContent = "";
+    messageError.textContent = "";
+    successMessage.textContent = "";
 
-  let isValid = true;
+    let isValid = true;
 
-  if (nameInput.value.trim() === "") {
-    nameError.textContent = "Name is required.";
-    isValid = false;
-  }
+    if (nameInput.value.trim() === "") {
+      nameError.textContent = "Name is required.";
+      isValid = false;
+    }
 
-  if (emailInput.value.trim() === "" || !emailInput.value.includes("@")) {
-    emailError.textContent = "Enter a valid email.";
-    isValid = false;
-  }
+    if (emailInput.value.trim() === "" || !emailInput.value.includes("@")) {
+      emailError.textContent = "Enter a valid email.";
+      isValid = false;
+    }
 
-  if (messageInput.value.trim().length < 10) {
-    messageError.textContent = "Message must be at least 10 characters.";
-    isValid = false;
-  }
+    if (messageInput.value.trim().length < 10) {
+      messageError.textContent = "Message must be at least 10 characters.";
+      isValid = false;
+    }
 
-  if (isValid) {
-    successMessage.textContent = "Request submitted successfully.";
-    requestForm.reset();
-  }
-});
+    if (isValid) {
+      successMessage.textContent = "Request submitted successfully.";
+      requestForm.reset();
+    }
+  });
+}
